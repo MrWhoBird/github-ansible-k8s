@@ -1,4 +1,4 @@
-ec2.1 - install jenkins (+ssh agent)
+ec2.1 - install jenkins (+ssh agent+git)
 ec2.2 - install ansible
 ec2.3 - install kubernetes (+docker+kubectl+minikube)
 
