@@ -10,3 +10,4 @@ add github webhook to jenkins:
 
 send dockerfile to ansible via ssh:
  -jenkins -> configure -> publish over ssh -> add ssh server
+ 
