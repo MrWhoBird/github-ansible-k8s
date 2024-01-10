@@ -6,7 +6,7 @@ node {
     stage('send Dockerfile to ansible over ssh'){
         sshagent(['ansible-server']) {
             sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83'
-            sh 'scp /var/lib/jenkins/workspace/github-ansible-k8s-simpleCommitJob/* ec2-user@172.31.93.83:/home/ec2-user'
+            sh 'scp /var/lib/jenkins/workspace/github-ansible-k8s-simple-commit-job/* ec2-user@172.31.93.83:/home/ec2-user'
         }
     }
     stage('build image from Dockerfile'){
