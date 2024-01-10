@@ -1,0 +1,12 @@
+node {
+
+    stage('github webhook'){
+        git 'https://github.com/MrWhoBird/github-ansible-k8s.git'
+    }
+    stage('send Dockerfile to ansible over ssh'){
+        sshagent(['ansible-server']) {
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83'
+            sh 'scp /var/lib/jenkins/workspace/github-ansible-k8s-simpleCommitJob/* ec2-user@172.31.93.83:/home/ec2-user'
+        }
+    }
+}
