@@ -9,4 +9,17 @@ node {
             sh 'scp /var/lib/jenkins/workspace/github-ansible-k8s-simpleCommitJob/* ec2-user@172.31.93.83:/home/ec2-user'
         }
     }
+    stage('build image from Dockerfile'){
+        sshagent(['ansible-server']) {
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 cd /hom/ec2-user/'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 sudo docker build -t $JOB_NAME:v1.$BUILD_ID .'
+        }
+    }
+    stage('image tagging'){
+        sshagent(['ansible-server']) {
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 cd /hom/ec2-user/'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 sudo docker image tag $JOB_NAME:v1.$BUILD_ID devopst/$JOB_NAME:v1.$BUILD_ID'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 sudo docker image tag $JOB_NAME:v1.$BUILD_ID devopst/$JOB_NAME:latest'
+        }
+    }
 }
