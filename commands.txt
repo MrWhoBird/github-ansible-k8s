@@ -2,6 +2,8 @@ ec2.1 - install jenkins (+ssh agent+git)
 ec2.2 - install ansible
 ec2.3 - install kubernetes (+docker+kubectl+minikube)
 
+dockerfile
+
 add github webhook to jenkins:
   -set github job in jenkins
   -generate api token from jenkins
