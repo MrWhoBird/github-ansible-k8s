@@ -1,5 +1,5 @@
 ec2.1 - install jenkins (+ssh agent+git)
-ec2.2 - install ansible
+ec2.2 - install ansible (+docker+add ec2-user to docker group)
 ec2.3 - install kubernetes (+docker+kubectl+minikube)
 
 jenkins: 
@@ -9,3 +9,5 @@ jenkins:
 
 send dockerfile to ansible via ssh:
  -jenkins -> ssh agent plugin -> add server credentials and script [like in jenkinsfile]
+
+ ansible:
