@@ -1,25 +1,27 @@
 node {
 
-    stage('github webhook'){
+    stage('github clone'){
         git 'https://github.com/MrWhoBird/github-ansible-k8s.git'
     }
     stage('send Dockerfile to ansible over ssh'){
         sshagent(['ansible-server']) {
-            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83'
-            sh 'scp /var/lib/jenkins/workspace/github-ansible-k8s-simple-commit-job/* ec2-user@172.31.93.83:/home/ec2-user'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10'
+            sh 'scp /var/lib/jenkins/workspace/k8s-yt/* ec2-user@172.31.32.10:/home/ec2-user'
         }
     }
     stage('build image from Dockerfile'){
         sshagent(['ansible-server']) {
-            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 cd /home/ec2-user/'
-            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 sudo docker build -t $JOB_NAME:v1.$BUILD_ID .'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 cd /home/ec2-user/'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 docker build -t devopst/$JOB_NAME:v1.$BUILD_ID .'
         }
     }
-    stage('image tagging'){
+    stage('push image to dockerhub'){
         sshagent(['ansible-server']) {
-            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 cd /home/ec2-user/'
-            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 sudo docker image tag $JOB_NAME:v1.$BUILD_ID devopst/$JOB_NAME:v1.$BUILD_ID'
-            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.93.83 sudo docker image tag $JOB_NAME:v1.$BUILD_ID devopst/$JOB_NAME:latest'
+            withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')])  {
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 docker login -u devopst -p ${dockerhub}'
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 cd /home/ec2-user/'
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 docker push devopst/$JOB_NAME:v1.$BUILD_ID'
+            }
         }
     }
 }

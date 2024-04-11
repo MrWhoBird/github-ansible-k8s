@@ -7,7 +7,6 @@ jenkins:
 - add webhook (generate api token from jenkins, add token to github + generate webhook /github-webhook/, var/lib/jenkins/workspace)
 - OR add pol scm
 
-send dockerfile to ansible via ssh:
- -jenkins -> ssh agent plugin -> add server credentials and script [like in jenkinsfile]
-
- ansible:
+-send dockerfile to ansible via ssh -> jenkins -> ssh agent plugin -> add server credentials and script [jenkinsfile]
+-build an image with jenkins ssh [jenkinsfile]
+-push the image to dockerhub with ssh [jenkinsfile]
