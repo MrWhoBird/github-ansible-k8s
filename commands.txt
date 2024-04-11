@@ -7,6 +7,18 @@ jenkins:
 - add webhook (generate api token from jenkins, add token to github + generate webhook /github-webhook/, var/lib/jenkins/workspace)
 - OR add pol scm
 
--send dockerfile to ansible via ssh -> jenkins -> ssh agent plugin -> add server credentials and script [jenkinsfile]
+-create an ssh connection jenkins-ansible (ssh agent plugin -> add server credentials/ssh key)
+-send dockerfile to ansible via ssh -> script [jenkinsfile]
 -build an image with jenkins ssh [jenkinsfile]
 -push the image to dockerhub with ssh [jenkinsfile]
+
+create an ssh connection ansible-kubernetes:
+K8S:
+-set password
+-sshd_config+allow pass auth+service restart
+ANSIBLE:
+-ssh-keygen
+-ssh-copy-id -i root@ip
+-add ip to ansible hosts
+
+copy files from ansible to k8s [jenkinsfile] + add credentials to connect kubernetes

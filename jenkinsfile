@@ -21,6 +21,7 @@ node {
                 sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 docker login -u devopst -p ${dockerhub}'
                 sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 cd /home/ec2-user/'
                 sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 docker push devopst/$JOB_NAME:v1.$BUILD_ID'
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 docker rmi devopst/$JOB_NAME:v1.$BUILD_ID'
             }
         }
     }
