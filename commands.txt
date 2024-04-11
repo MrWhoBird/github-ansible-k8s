@@ -2,13 +2,10 @@ ec2.1 - install jenkins (+ssh agent+git)
 ec2.2 - install ansible
 ec2.3 - install kubernetes (+docker+kubectl+minikube)
 
-dockerfile
-
-add github webhook to jenkins:
-  -set github job in jenkins
-  -generate api token from jenkins
-  -add token to github + generate webhook (/github-webhook/)
-  -var/lib/jenkins/workspace
+jenkins: 
+- create a job 
+- add webhook (generate api token from jenkins, add token to github + generate webhook /github-webhook/, var/lib/jenkins/workspace)
+- OR add pol scm
 
 send dockerfile to ansible via ssh:
- -jenkins -> ssh agent plugin -> add server and script [like in jenkinsfile]
+ -jenkins -> ssh agent plugin -> add server credentials and script [like in jenkinsfile]
