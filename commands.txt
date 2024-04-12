@@ -14,11 +14,11 @@ jenkins:
 
 create an ssh connection ansible-kubernetes:
 K8S:
--set password
--sshd_config+allow pass auth+service restart
+-set password [passwd root]
+-etc/ssh/sshd_config+allow pass auth+permit root login+service restart
 ANSIBLE:
 -ssh-keygen
--ssh-copy-id -i root@ip
--add ip to ansible hosts
+-ssh-copy-id root@ip
+-add ip to ansible hosts (ansible -m ping + ip)
 
-copy files from ansible to k8s [jenkinsfile] + add credentials to connect kubernetes
+copy files from ansible to k8s [jenkinsfile] + add credentials to connect kubernetes in jenkins ssh agent

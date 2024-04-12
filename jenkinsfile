@@ -3,7 +3,7 @@ node {
     stage('github clone'){
         git 'https://github.com/MrWhoBird/github-ansible-k8s.git'
     }
-    stage('send Dockerfile to ansible over ssh'){
+    stage('send files from jenkins to ansible over ssh'){
         sshagent(['ansible-server']) {
             sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10'
             sh 'scp /var/lib/jenkins/workspace/k8s-yt/* ec2-user@172.31.32.10:/home/ec2-user'
@@ -23,6 +23,12 @@ node {
                 sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 docker push devopst/$JOB_NAME:v1.$BUILD_ID'
                 sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 docker rmi devopst/$JOB_NAME:v1.$BUILD_ID'
             }
+        }
+    }
+    stage('copy files from jenkins to k8s over ssh'){
+        sshagent(['k8s']) {
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.31.187'
+            sh 'scp /var/lib/jenkins/workspace/k8s-yt/* ec2-user@172.31.31.187:/home/ec2-user'
         }
     }
 }
