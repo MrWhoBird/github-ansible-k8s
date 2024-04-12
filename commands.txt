@@ -21,4 +21,4 @@ ANSIBLE:
 -ssh-copy-id root@ip
 -add ip to ansible hosts (ansible -m ping + ip)
 
-copy files from ansible to k8s [jenkinsfile] + add credentials to connect kubernetes in jenkins ssh agent
+copy files from jenkins to k8s [jenkinsfile] + add credentials to connect kubernetes in jenkins ssh agent
