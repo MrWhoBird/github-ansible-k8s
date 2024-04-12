@@ -17,8 +17,9 @@ K8S:
 -set password [passwd root]
 -etc/ssh/sshd_config+allow pass auth+permit root login+service restart
 ANSIBLE:
--ssh-keygen
--ssh-copy-id root@ip
+-ssh-keygen [generate by specific user]
+-ssh-copy-id user@ip
 -add ip to ansible hosts (ansible -m ping + ip)
 
 copy files from jenkins to k8s [jenkinsfile] + add credentials to connect kubernetes in jenkins ssh agent
+k8s deployment with ansible playbook -> [jenkinsfile]

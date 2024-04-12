@@ -34,7 +34,7 @@ node {
     stage('k8s deployment with ansible playbook'){
         sshagent(['ansible-server']) {
             sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 cd /home/ec2-user/'
-            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 sudo ansible-playbook ansible.yml'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.32.10 ansible-playbook ansible.yml'
         }
     }
 }
