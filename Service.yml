@@ -6,8 +6,8 @@ metadata:
     app: devopst
 spec:
   ports:
-    - port: 8085                               
-      targetPort: 30                    
+    - port: 8086                               
+      targetPort: 3333                    
   selector:
     app: devopst                    
   type: LoadBalancer                   
