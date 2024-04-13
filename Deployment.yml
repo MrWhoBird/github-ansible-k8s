@@ -17,4 +17,4 @@ spec:
           image: devopst/k8s-yt
           imagePullPolicy: Always
           ports:
-          - containerPort: 80
+          - containerPort: 30
