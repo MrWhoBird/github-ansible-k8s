@@ -10,5 +10,3 @@
        command: kubectl apply -f /home/ec2-user/Deployment.yml
      - name: create new service
        command: kubectl apply -f /home/ec2-user/Service.yml
-     - name: run the service
-       command: minikube service devopst
